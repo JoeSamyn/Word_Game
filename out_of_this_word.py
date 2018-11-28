@@ -1,5 +1,6 @@
 import random
 import enchant
+import os
 
 D = enchant.Dict("en_US")
 
@@ -17,6 +18,7 @@ def promt_for_words(player,challenge):
     while True:
         guess = input("{} words   > ".format(len(guesses)))
         if guess.upper() == 'Q':
+            os.system('cls' if os.name == 'nt' else 'clear')
             break
         for letter in guess:
             if letter not in challenge:
@@ -30,8 +32,10 @@ def promt_for_words(player,challenge):
     return guesses
 
 def output_results(results):
-    for index, word in enumerate(results):
+    index = 1
+    for word in results:
         print("{}. {}".format(index + 1, word))
+        index += 1
 
 challenge_word = random.choice(WORDS)
 player1_words = promt_for_words("Player 1", challenge_word)
